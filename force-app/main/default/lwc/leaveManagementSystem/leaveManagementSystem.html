@@ -1,0 +1,148 @@
+<!-- sldsValidatorIgnore -->
+<template>
+    <div class="slds-p-around--medium">
+        <h3 class="slds-m-around_medium slds-text-heading_medium slds-text-align_center"><strong
+                style="color:#ffffff;">Leave Management System</strong></h3>
+                <!-- onselect={tabSelected} active-tab-value={selTabValue} selected-tab-id={selTabId} id="tabset" -->
+        <lightning-tabset variant="scoped" active-tab-value={selTabValue} >
+            <lightning-tab label="My Leave Status" onactive={tabSelected1} value="tabv1">
+                <div class="tabContent">
+                    <template lwc:if={showRecScreen}>
+                        <!-- modal start -->
+                        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
+                            aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+                            <div class="slds-modal__container">
+                                <!-- modal header start -->
+                                <header class="slds-modal__header">
+                                    <button
+                                        class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse"
+                                        title="Close" onclick={closePopup}>
+                                        <lightning-icon icon-name="utility:close" alternative-text="close"
+                                            variant="inverse" size="small"></lightning-icon>
+                                        <span class="slds-assistive-text">Close</span>
+                                    </button>
+                                    <h2 class="slds-text-heading_medium slds-hyphenate">New Leave Request</h2>
+                                </header>
+                                <!-- modal body start -->
+                                <div class="slds-modal__content slds-p-around_medium">
+                                    <lightning-record-form object-api-name={objectApiName} record-id={editButtonRecID}
+                                        fields={fieldsLimited} onsubmit={handleSubmit} onsuccess={handleSuccess}
+                                        oncancel={closePopup}>
+                                    </lightning-record-form>
+                                </div>
+                            </div>
+                        </section>
+                        <div class="slds-backdrop slds-backdrop_open">
+                        </div>
+                        <!-- modal end -->
+                    </template>
+                    <div class="slds-p-around_medium lgc-bg slds-align_absolute-center">
+                        <lightning-button-icon icon-name="utility:new" variant="brand" alternative-text="New"
+                            onclick={handleNewLeaveRequest}>New Request</lightning-button-icon>
+                    </div>
+                    <!-- <div>Hello, Current User is {userName}, Role is {userRole}</div> -->
+                    <div class="slds-box slds-box_x-small">
+                        <lightning-datatable data={leaveDataToDisplay} columns={columns} key-field="Id"
+                            hide-checkbox-column="true" onrowaction={toEditButtonActionEmp}>
+                        </lightning-datatable>
+                    </div>
+                </div>
+            </lightning-tab>
+            <lightning-tab label="My Leaves" onactive={tabSelected2} value="tabv2">
+                <div class="tabContent">
+                    <!-- if:true switched to lwc:if for future proof -->
+                    <template lwc:if={showChartScreen}>
+                        <lightning-layout>
+                            <lightning-layout-item padding="around-small" size="4">
+                                <div class="custom-box slds-box slds-p-around_medium">
+                                    <lightning-card title="Planned Leave" icon-name="utility:chart">
+                                        <div class="slds-var-m-around_medium">
+                                            <canvas class="pieChartPlanned" lwc:dom="manual" width="250" height="250"></canvas>
+                                            <div lwc:if = {isChartNotInitialized}>
+                                                <lightning-spinner alternative-text="Loading" size="medium" variant="base"></lightning-spinner>
+                                            </div>
+                                            <!-- if:false alternative not present in lwc format -->
+                                            <div lwc:else>
+                                                <!-- <div class="slds-text-align_center">Consumed Leaves, Remaning Leaves : {_chartPlannedLevVal}</div> -->
+                                            </div>
+                                        </div>
+                                    </lightning-card>
+                                </div>
+                            </lightning-layout-item>
+                        
+                            <lightning-layout-item padding="around-small" size="4">
+                                <div class="custom-box slds-box slds-p-around_medium">
+                                    <lightning-card title="Sick Leave" icon-name="utility:chart">
+                                        <div class="slds-var-m-around_medium">
+                                        <canvas class="pieChartSick" lwc:dom="manual" width="250" height="250"></canvas>
+                                    <div lwc:if = {isChartNotInitialized}>
+                                        <lightning-spinner alternative-text="Loading" size="medium" variant="base"></lightning-spinner>
+                                    </div>
+                                    <div lwc:else>
+                                    <div class="slds-text-align_center">Consumed Leaves, Remaning Leaves : {_chartSickLevVal}</div>
+                                    </div>
+                                    </div>
+                                    </lightning-card>
+                                </div>
+                            </lightning-layout-item>
+                        
+                            <lightning-layout-item padding="around-small" size="4">
+                                <div class="custom-box slds-box slds-p-around_medium">
+                                <lightning-card title="Unpaid Leave" icon-name="utility:chart">
+                                <div class="slds-var-m-around_medium">
+                                <canvas class="pieChartUnpaid" lwc:dom="manual" width="250" height="250"></canvas>
+                                <div lwc:if = {isChartNotInitialized}>
+                                    <lightning-spinner alternative-text="Loading" size="medium" variant="base"></lightning-spinner>
+                                </div>
+                                <div lwc:else>
+                                <div class="slds-text-align_center">Consumed Leaves, Remaning Leaves : {_chartUnpaidLevVal}</div>
+                                </div>
+                            </div>
+                                </lightning-card>
+                                </div>
+                            </lightning-layout-item>
+                        </lightning-layout>
+                    </template>
+                </div>
+            </lightning-tab>
+            <lightning-tab label="Applied Leaves" onactive={tabSelected3} value="tabv3">
+                <div class="tabContent">
+                    <template lwc:if={showRecScreen}>
+                        <!-- modal start -->
+                        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
+                            aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+                            <div class="slds-modal__container">
+                                <!-- modal header start -->
+                                <header class="slds-modal__header">
+                                    <button
+                                        class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse"
+                                        title="Close" onclick={closePopup}>
+                                        <lightning-icon icon-name="utility:close" alternative-text="close"
+                                            variant="inverse" size="small"></lightning-icon>
+                                        <span class="slds-assistive-text">Close</span>
+                                    </button>
+                                    <h2 class="slds-text-heading_medium slds-hyphenate">New Leave Request</h2>
+                                </header>
+                                <!-- modal body start -->
+                                <div class="slds-modal__content slds-p-around_medium">
+                                    <lightning-record-form object-api-name={objectApiName} record-id={editButtonRecID}
+                                        fields={fieldsDynamic} onsubmit={handleSubmit} onsuccess={handleSuccess}
+                                        oncancel={closePopup}>
+                                    </lightning-record-form>
+                                </div>
+                            </div>
+                        </section>
+                        <div class="slds-backdrop slds-backdrop_open">
+                        </div>
+                        <!-- modal end -->
+                    </template>
+                    <div class="slds-box slds-box_x-small">
+                        <lightning-datatable data={leaveDataToDisplay} columns={columns} key-field="Id"
+                            hide-checkbox-column="true" onrowaction={toEditButtonActionEmp}>
+                        </lightning-datatable>
+                    </div>
+                </div>
+            </lightning-tab>
+        </lightning-tabset>
+    </div>
+</template>

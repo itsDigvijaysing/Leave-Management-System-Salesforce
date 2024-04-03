@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ToDate_Always_Be_Future_Date</fullName>
+    <active>true</active>
+    <description>Only Future date Todate is allowed &amp; it will not be past date relative to from Date.</description>
+    <errorConditionFormula>To_Date__c &lt; From_Date__c</errorConditionFormula>
+    <errorMessage>To Date should be in future than From Date</errorMessage>
+</ValidationRule>

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Package xmlns="http://soap.sforce.com/2006/04/metadata">
+
+    <types>
+        <members>leaveManagementSys_ApproveVal</members>
+        <members>leaveManagementSys_UserLeaveVal_lwc</members>
+        <members>leaveManagementSys_UserDataRtn_lwc</members>
+        <members>leaveManagementSys_UserLeaveVal_test</members>
+        <members>leaveManagementSys_UserDataRtn_test</members>
+        <name>ApexClass</name>
+    </types>
+
+    <types>
+        <members>leaveRequestObjTrigger</members>
+        <name>ApexTrigger</name>
+    </types>
+
+    <types>
+        <members>LWC_App</members>
+        <name>CustomApplication</name>
+    </types>
+
+    <types>
+        <members>Leave_Management_Page</members>
+        <members>LWC_App_UtilityBar</members>
+        <name>FlexiPage</name>
+    </types>
+
+    <types>
+        <members>Leave_Requests__c</members>
+        <members>User_Leaves__c</members>
+        <name>CustomTab</name>
+    </types>
+
+    <types>
+        <members>leaveManagementSystem</members>
+        <name>LightningComponentBundle</name>
+    </types>
+
+    <types>
+        <members>Leave_Requests__c</members>
+        <members>User_Leaves__c</members>
+        <name>CustomObject</name>
+    </types>
+
+    <types>
+        <members>Manager</members>
+        <members>Employee</members>
+        <name>Role</name>
+    </types>
+
+    <types>
+        <members>Custom Std Platform User</members>
+        <members>Admin</members>
+        <name>Profile</name>
+    </types>
+
+    <types>
+        <members>chartJS</members>
+        <name>StaticResource</name>
+    </types>
+
+    <version>58.0</version>
+</Package>
