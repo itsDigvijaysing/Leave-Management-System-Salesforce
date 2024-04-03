@@ -1,18 +1,15 @@
-# Salesforce DX Project: Next Steps
+# Leave Management System
 
-Now that you’ve created a Salesforce DX project, what’s next? Here are some documentation resources to get you started.
+## Description
+The Leave Management System is a Salesforce application designed to streamline the process of applying for and managing leaves. The system includes a Lightning Web Component (LWC) for applying for leaves such as planned leave, sick leave, and unpaid leaves. Users can add reasons for the leaves when applying. After applying, users can also edit leaves that are neither approved nor rejected. Applied leaves are sent to senior managers for approval or rejection with reasons.
 
-## How Do You Plan to Deploy Your Changes?
+## Features
+- Allows users to apply for leaves (planned leave, sick leave, unpaid leave) through a Lightning Web Component.
+- Users can add reasons for leaves when applying.
+- Users can edit leaves that are not yet approved or rejected.
+- Senior managers can approve or reject applied leaves with reasons.
+- Includes a 'My Leaves' tab where users can see their leave types and remaining leaves in a PieChart format.
+- Includes an 'Applied Leaves' tab where users can see the history of their approved or rejected leaves.
 
-Do you want to deploy a set of changes, or create a self-contained application? Choose a [development model](https://developer.salesforce.com/tools/vscode/en/user-guide/development-models).
-
-## Configure Your Salesforce DX Project
-
-The `sfdx-project.json` file contains useful configuration information for your project. See [Salesforce DX Project Configuration](https://developer.salesforce.com/docs/atlas.en-us.sfdx_dev.meta/sfdx_dev/sfdx_dev_ws_config.htm) in the _Salesforce DX Developer Guide_ for details about this file.
-
-## Read All About It
-
-- [Salesforce Extensions Documentation](https://developer.salesforce.com/tools/vscode/)
-- [Salesforce CLI Setup Guide](https://developer.salesforce.com/docs/atlas.en-us.sfdx_setup.meta/sfdx_setup/sfdx_setup_intro.htm)
-- [Salesforce DX Developer Guide](https://developer.salesforce.com/docs/atlas.en-us.sfdx_dev.meta/sfdx_dev/sfdx_dev_intro.htm)
-- [Salesforce CLI Command Reference](https://developer.salesforce.com/docs/atlas.en-us.sfdx_cli_reference.meta/sfdx_cli_reference/cli_reference.htm)
+## Usage
+To use the Leave Management System, Add the Components in Org then navigate to the Leave Management System LWC for applying for leaves. Fill out the necessary details, including leave type and reason, and submit the form. Senior managers will receive notifications to approve or reject the leave. Users can also view their leave history and remaining leaves in the 'My Leaves' tab.
